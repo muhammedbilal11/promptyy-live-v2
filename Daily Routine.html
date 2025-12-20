@@ -1,0 +1,191 @@
+import React, { useState } from 'react';
+import { Clock, Briefcase, BookOpen, Coffee, Moon, Sun, Activity, Users, CheckCircle, Calendar, Play, RefreshCw } from 'lucide-react';
+
+const DailyRoutine = () => {
+  const [activeTab, setActiveTab] = useState('weekday');
+
+  // Color and Icon mapping for categories
+  const getCategoryStyle = (category) => {
+    switch (category) {
+      case 'Business': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'Academics': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+      case 'Health': return 'bg-orange-100 text-orange-800 border-orange-200';
+      case 'Social': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'Rest': return 'bg-indigo-100 text-indigo-800 border-indigo-200';
+      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
+  const getIcon = (category) => {
+    switch (category) {
+      case 'Business': return <Briefcase size={18} />;
+      case 'Academics': return <BookOpen size={18} />;
+      case 'Health': return <Activity size={18} />;
+      case 'Social': return <Users size={18} />;
+      case 'Rest': return <Moon size={18} />;
+      default: return <Clock size={18} />;
+    }
+  };
+
+  const weekdaySchedule = [
+    { time: '06:00 AM', title: 'The Silent Hour', category: 'Business', desc: 'Hostel is quiet. Deep work on your startup (Coding/Strategy). No social media.' },
+    { time: '07:30 AM', title: 'Morning Protocol', category: 'Health', desc: 'Quick workout/Yoga + High protein breakfast in Mess.' },
+    { time: '09:00 AM', title: 'BCA College Hours', category: 'Academics', desc: 'Attend lectures. Use breaks to network or fix bugs.' },
+    { time: '01:00 PM', title: 'Lunch Networking', category: 'Social', desc: 'Eat with different groups. Find potential co-founders or users.' },
+    { time: '02:00 PM', title: 'Labs & Practical', category: 'Academics', desc: 'Finish college assignments fast. Use lab WiFi for research.' },
+    { time: '05:00 PM', title: 'Physical Reset', category: 'Health', desc: 'Gym, Sport, or Run. Mandatory to clear "Coder\'s Block".' },
+    { time: '06:30 PM', title: 'Academic Focus', category: 'Academics', desc: 'Study for GPA. Complete records. Keep scholarship secure.' },
+    { time: '08:30 PM', title: 'Hostel Dinner', category: 'Social', desc: 'Relax with roommates. No business talk. Just chill.' },
+    { time: '09:30 PM', title: 'Admin & Planning', category: 'Business', desc: 'Emails, Social Media posts, planning tomorrow.' },
+    { time: '11:00 PM', title: 'Sleep (Mon-Thu)', category: 'Rest', desc: 'Strict 7 hours. *Exception: Friday Night sleep is at 12:00 AM+*' },
+  ];
+
+  const saturdaySchedule = [
+    { time: '08:30 AM', title: 'Recovery Wake-Up', category: 'Rest', desc: 'Recovering from late Friday night hustle. Hydrate immediately.' },
+    { time: '09:30 AM', title: 'Deep Work Block', category: 'Business', desc: 'Go to library/cafe. 4-5 hours of uninterrupted product building.' },
+    { time: '02:00 PM', title: 'Late Lunch', category: 'Health', desc: 'Fuel up after the sprint.' },
+    { time: '03:00 PM', title: 'Skill Acquisition', category: 'Academics', desc: 'Learn new tech (MERN/Flutter) outside college syllabus.' },
+    { time: '06:00 PM', title: 'Social Outing', category: 'Social', desc: 'Movie, dinner, or gaming with friends. You earned this.' },
+    { time: '09:00 PM', title: 'Creative Freedom', category: 'Business', desc: 'Brainstorming, designing, or side-projects. Low pressure.' },
+    { time: '12:30 AM', title: 'Late Sleep', category: 'Rest', desc: 'It\'s the weekend. Enjoy the late night.' },
+  ];
+
+  const sundaySchedule = [
+    { time: '09:00 AM', title: 'Slow Start', category: 'Rest', desc: 'Sleep in. Recharge mental batteries.' },
+    { time: '11:00 AM', title: 'Life Admin', category: 'Health', desc: 'Laundry, cleaning room, calling parents/family.' },
+    { time: '01:00 PM', title: 'Sunday Feast', category: 'Social', desc: 'Big lunch with hostel mates.' },
+    { time: '03:00 PM', title: 'Review & Plan', category: 'Business', desc: 'Review weekly metrics. Plan next week\'s academic & business goals.' },
+    { time: '05:00 PM', title: 'Light Study', category: 'Academics', desc: 'Pre-read for next week\'s lectures or finish pending records.' },
+    { time: '08:00 PM', title: 'Wind Down', category: 'Health', desc: 'Pack bag for Monday. Relax.' },
+    { time: '11:00 PM', title: 'Hard Reset Sleep', category: 'Rest', desc: 'Strict bedtime. Monday starts early.' },
+  ];
+
+  let currentSchedule;
+  let stats;
+
+  if (activeTab === 'weekday') {
+    currentSchedule = weekdaySchedule;
+    stats = { Business: 25, Academics: 40, Health: 20, Social: 15 };
+  } else if (activeTab === 'saturday') {
+    currentSchedule = saturdaySchedule;
+    stats = { Business: 45, Academics: 10, Health: 15, Social: 30 };
+  } else {
+    currentSchedule = sundaySchedule;
+    stats = { Business: 15, Academics: 15, Health: 40, Social: 30 };
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-4 font-sans text-slate-800">
+      <div className="max-w-3xl mx-auto">
+        
+        {/* Header */}
+        <header className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-slate-900 flex items-center justify-center gap-2">
+            <Sun className="text-orange-500" /> 
+            The Balanced Hustler
+          </h1>
+          <p className="text-slate-500 mt-2">
+            Optimized for Hostel Life (BCA × Entrepreneur)
+          </p>
+        </header>
+
+        {/* Toggle */}
+        <div className="flex justify-center mb-8 px-2">
+          <div className="bg-white p-1 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-center gap-2 sm:gap-0">
+            <button 
+              onClick={() => setActiveTab('weekday')}
+              className={`px-4 sm:px-6 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${activeTab === 'weekday' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+            >
+              <Calendar size={16} /> Weekday
+            </button>
+            <button 
+              onClick={() => setActiveTab('saturday')}
+              className={`px-4 sm:px-6 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${activeTab === 'saturday' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+            >
+              <Play size={16} /> Saturday
+            </button>
+            <button 
+              onClick={() => setActiveTab('sunday')}
+              className={`px-4 sm:px-6 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${activeTab === 'sunday' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+            >
+              <RefreshCw size={16} /> Sunday
+            </button>
+          </div>
+        </div>
+
+        {/* Balance Meter */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-8 transition-all duration-300">
+          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex justify-between">
+            <span>Energy Distribution ({activeTab.charAt(0).toUpperCase() + activeTab.slice(1)})</span>
+          </h3>
+          <div className="flex h-4 rounded-full overflow-hidden mb-4 bg-slate-100">
+            <div style={{ width: `${stats.Business}%` }} className="bg-blue-500 transition-all duration-500"></div>
+            <div style={{ width: `${stats.Academics}%` }} className="bg-emerald-500 transition-all duration-500"></div>
+            <div style={{ width: `${stats.Health}%` }} className="bg-orange-500 transition-all duration-500"></div>
+            <div style={{ width: `${stats.Social}%` }} className="bg-purple-500 transition-all duration-500"></div>
+          </div>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-blue-500"></div> Business</div>
+            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-emerald-500"></div> Academics</div>
+            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-orange-500"></div> Health</div>
+            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-purple-500"></div> Social</div>
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div className="space-y-4">
+          {currentSchedule.map((item, index) => (
+            <div key={index} className="group flex gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-blue-300 cursor-default">
+              
+              {/* Time Column */}
+              <div className="w-20 pt-1 flex-shrink-0 text-right">
+                <span className="font-bold text-slate-700 block">{item.time}</span>
+              </div>
+
+              {/* Decorator Line */}
+              <div className="relative flex flex-col items-center">
+                 <div className={`w-3 h-3 rounded-full border-2 mt-2 z-10 bg-white ${
+                    item.category === 'Business' ? 'border-blue-500' :
+                    item.category === 'Academics' ? 'border-emerald-500' :
+                    item.category === 'Health' ? 'border-orange-500' :
+                    item.category === 'Social' ? 'border-purple-500' : 
+                    item.category === 'Rest' ? 'border-indigo-400' : 'border-slate-400'
+                 }`}></div>
+                 {index !== currentSchedule.length - 1 && (
+                    <div className="w-0.5 h-full bg-slate-100 absolute top-4 -bottom-4"></div>
+                 )}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 pb-2">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-bold text-slate-900 text-lg">{item.title}</h3>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded-full border flex items-center gap-1 ${getCategoryStyle(item.category)}`}>
+                    {getIcon(item.category)}
+                    {item.category}
+                  </span>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-8 bg-indigo-900 text-indigo-100 p-6 rounded-2xl text-center shadow-lg">
+          <h3 className="font-bold text-xl mb-2">
+            {activeTab === 'weekday' ? '💡 The Hostel Rule' : activeTab === 'saturday' ? '🚀 Saturday Hustle' : '🔋 Sunday Reset'}
+          </h3>
+          <p className="opacity-90 text-sm">
+            {activeTab === 'weekday' && "Use the 06:00 AM slot religiously. It is the only time you truly own."}
+            {activeTab === 'saturday' && "Friday night was late, so we start slow. But we work hard until midnight."}
+            {activeTab === 'sunday' && "The goal of Sunday is not to work. The goal is to be 100% ready for Monday."}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default DailyRoutine;
