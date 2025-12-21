@@ -3,320 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="jaIMIoRybbz5x1LrBV_G2i9gKR9T6kxs-fDCx_hSmQo" />
-    <title>PROMPTYY - Your AI Prompt Generator</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-
+    <title>Promptyy | The AI Prompt Library</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #333; 
+        /* --- GLOBAL STYLES --- */
+        * {
             margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        .container {
-            flex-grow: 1; 
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 25px;
-            background-color: #ffffff; 
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        header {
-            text-align: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            margin: 0;
-            color: #2c3e50;
-        }
-        header p {
-            margin: 5px 0 0;
-            font-size: 1.1em;
-            color: #555;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #34495e;
-        }
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box; 
-            font-size: 1em;
-            background-color: #fff; 
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #3498db;
-            color: white;
-            font-size: 1.1em;
-            font-weight: 600;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .output-area {
-            margin-top: 30px;
-            position: relative; /* Needed for copy button */
-        }
-        #output-prompt {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-radius: 6px;
-            border: 1px dashed #bdc3c7;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 1.1em;
-            line-height: 1.5;
-            white-space: pre-wrap; 
-            word-wrap: break-word;
-            min-height: 100px;
-            color: #2c3e50;
-        }
-
-        #output-prompt.error {
-            color: #c0392b; 
-            background-color: #fce4e4; 
-            border-color: #e74c3c; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            font-weight: 600; 
-        }
-        
-        #copy-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 6px 12px;
-            font-size: 0.9em;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 0 6px 0 6px;
-            cursor: pointer;
-            display: none; /* Hide it initially */
-        }
-        #copy-button:hover {
-            background-color: #34495e;
-        }
-        
-        .ad-placeholder {
-            width: 100%;
-            max-width: 728px; 
-            height: 90px;    
-            background-color: #f0f0f0;
-            border: 1px dashed #999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 1.1em;
-            font-weight: 600;
-            margin: 30px auto; 
+            padding: 0;
             box-sizing: border-box;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #777; 
-            font-size: 0.9em;
-        }
-        footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
+        body {
+            background-color: #121212; /* Dark Background */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        /* --- 1. HEADER (Navigation) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%; /* 5% padding on sides */
+            background-color: rgba(18, 18, 18, 0.95); /* Slightly transparent */
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid #333;
+            z-index: 100;
         }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6); /* Gradient Text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .btn-submit {
+            background-color: white;
+            color: black !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* --- 2. HERO SECTION (Search) --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 1px solid #444;
+            background-color: #1e1e1e;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #3b82f6; /* Blue glow on focus */
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* --- 3. PROMPT GRID (Your Cards Go Here) --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsive Grid */
+            gap: 20px;
+        }
+
+        /* --- CARD STYLES (From Previous Step) --- */
+        .prompt-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tag { font-size: 11px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; }
+        .tag-model { background-color: #2563eb; color: white; }
+        .tag-cat { background-color: #333; color: #ccc; border: 1px solid #444; }
+
+        .prompt-content {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #ddd;
+            margin-bottom: 15px;
+            min-height: 80px; /* Makes cards equal height */
+        }
+
+        .copy-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .copy-btn:hover { background-color: #ddd; }
+        .copy-btn.success { background-color: #22c55e; color: white; }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Welcome to PROMPTYY </h1>
-            <h2>"Your Perfect Prompt Engineer"</h2>
-            <p>Select your field, enter an idea, and get an expert-level AI prompt.</p>
-        </header>
+    <header>
+        <div class="logo">Promptyy.</div>
+        <nav class="nav-links">
+            <a href="#">Categories</a>
+            <a href="#">Top Rated</a>
+            <a href="#" class="btn-submit">+ Submit Prompt</a>
+        </nav>
+    </header>
 
-        <form id="prompt-form">
-            <div class="form-group">
-                <label for="category">1. Select a Category</label>
-                <select id="category" name="category">
-                    <option value="general">General / Everyday Life</option>
-                    <option value="student">Student & Academic</option>
-                    <option value="creative">Creative & Artist</option>
-                    <option value="business">Business & Marketing</option>
-                    <option value="developer">Developer & Tech</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="topic">2. What do you need?</label>
-                <input type="text" id="topic" name="topic" placeholder="e.g., 'plan a 7-day trip to Goa', 'healthy dinner ideas'">
-            </div>
-            <button type="submit">Generate AI Prompt</button>
-        </form>
-
-        <div class="output-area">
-            <label for="output-prompt">Your Generated Prompt:</label>
-            <button id="copy-button">Copy</button> 
-            <pre id="output-prompt">Your new prompt will appear here...</pre>
+    <section class="hero">
+        <h1>Find the Perfect Prompt</h1>
+        <p>Copy & paste proven prompts for ChatGPT, Midjourney, and more.</p>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search prompts (e.g., 'Python code', 'Logo design')...">
         </div>
-    </div> <div class="ad-placeholder"> Ad </div>
+    </section>
 
-    <footer>
-        <p>
-            <a href="https://github.com/muhammedbilal11" target="_blank">View Project on GitHub</a>
-        </p>
-    </footer>
+    <div class="container">
+        <h3 style="margin-bottom: 20px; color: #888;">Trending Prompts</h3>
+        
+        <div class="grid-layout">
+            
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="tag tag-model">ChatGPT</span>
+                    <span class="tag tag-cat">Coding</span>
+                </div>
+                <div class="prompt-content" id="p1">Act as a Senior Python Developer. Write a script to scrape data using BeautifulSoup with error handling.</div>
+                <button class="copy-btn" onclick="copyText('p1', this)">📋 Copy</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="tag tag-model">Midjourney</span>
+                    <span class="tag tag-cat">Art</span>
+                </div>
+                <div class="prompt-content" id="p2">Cyberpunk street style, neon lights, rain reflection, 8k resolution, cinematic lighting --ar 16:9</div>
+                <button class="copy-btn" onclick="copyText('p2', this)">📋 Copy</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="tag tag-model">Gemini</span>
+                    <span class="tag tag-cat">Writing</span>
+                </div>
+                <div class="prompt-content" id="p3">Rewrite this email to sound more professional and concise. Focus on clarity and remove passive voice.</div>
+                <button class="copy-btn" onclick="copyText('p3', this)">📋 Copy</button>
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("prompt-form");
-            const outputElement = document.getElementById("output-prompt");
-            const categoryDropdown = document.getElementById("category");
-            const topicInput = document.getElementById("topic");
-            const copyButton = document.getElementById("copy-button");
-
-            // --- FIX: PREVENT ENTER KEY RELOAD ---
-            // This forces the "Enter" key to click the button instead of reloading
-            topicInput.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault(); // Stop the reload
-                    // Trigger the form submit manually
-                    form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-                }
-            });
-            // -------------------------------------
-
-            // Update placeholder logic
-            categoryDropdown.addEventListener('change', () => {
-                const selectedCategory = categoryDropdown.value;
-                let newPlaceholder = "";
-                switch (selectedCategory) {
-                    case "general":
-                        newPlaceholder = "e.g., 'plan a 7-day trip to Goa', 'healthy dinner ideas'";
-                        break;
-                    case "student":
-                        newPlaceholder = "e.g., 'explain python loops', 'summarize this article'";
-                        break;
-                    case "creative":
-                        newPlaceholder = "e.g., 'logo for a coffee shop', '10 story ideas'";
-                        break;
-                    case "business":
-                        newPlaceholder = "e.g., 'marketing slogans for a new app', 'write a sales email'";
-                        break;
-                    case "developer":
-                        newPlaceholder = "e.g., 'debug my react hook', 'write a dockerfile for node'";
-                        break;
-                    default:
-                        newPlaceholder = "What can I help you with today?";
-                }
-                topicInput.placeholder = newPlaceholder;
-            });
-
-            // Form submission logic
-            form.addEventListener("submit", async (event) => {
-                event.preventDefault(); 
-                
-                const category = categoryDropdown.value;
-                const userNeed = topicInput.value;       
-                
-                outputElement.textContent = "Generating your advanced prompt... Please wait.";
-                outputElement.classList.remove('error'); 
-                copyButton.style.display = 'none'; // Hide button while loading
-
-                try {
-                    // Use relative path for Vercel deployment
-                    // The backend is on the same domain now!
-                    const response = await fetch('/generate', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ 
-                            category: category, 
-                            userNeed: userNeed 
-                        }) 
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json().catch(() => ({})); 
-                        const serverError = errorData.error || `Server responded with status: ${response.status}`;
-                        throw new Error(`Failed to get prompt: ${serverError}`);
-                    }
-
-                    const data = await response.json();
-                    outputElement.textContent = data.generatedPrompt.trim();
-                    outputElement.classList.remove('error'); 
-                    copyButton.style.display = 'block'; // Show copy button on success
-                    copyButton.textContent = 'Copy'; // Reset button text
-
-                } catch (error) {
-                    console.error('Error:', error);
-                    outputElement.textContent = 
-                        'Oops! It looks like our AI assistant is not reachable right now. ' +
-                        'Please ensure your PROMPTYY backend server is running in your terminal ' +
-                        '(type "node server.js" in your project folder) and try again. ' +
-                        'If the problem persists, please check your internet connection.';
-                    outputElement.classList.add('error'); 
-                    copyButton.style.display = 'none'; // Hide button on error
-                }
-            });
-
-            // Logic for the copy button
-            copyButton.addEventListener('click', () => {
-                const textToCopy = outputElement.textContent;
-                
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    copyButton.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy';
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
-            });
-
-        });
+        function copyText(id, btn) {
+            var text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            var originalText = btn.innerText;
+            btn.innerText = "✅ Copied!";
+            btn.classList.add("success");
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove("success");
+            }, 2000);
+        }
     </script>
 
 </body>
