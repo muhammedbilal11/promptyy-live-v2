@@ -187,6 +187,32 @@
             margin: 20px auto;
             border-radius: 8px;
         }
+/* Buy Me A Coffee Button Style */
+        .bmc-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FFDD00; /* Official BMC Yellow */
+            color: #000000 !important;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px; /* Pill shape */
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+
+        .bmc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3); /* Yellow glow */
+        }
+
+        .bmc-button img {
+            height: 20px;
+            margin-right: 8px;
+        }
 
         footer {
             margin-top: auto;
@@ -243,8 +269,13 @@
 
     <footer>
         <p>
-            <a href="https://github.com/muhammedbilal11/promptyy-live-v2" target="_blank">View Project on GitHub</a>
+            <a href="https://github.com/muhammedbilal11" target="_blank">View Project on GitHub</a>
         </p>
+
+        <a href="https://www.buymeacoffee.com/muhammedbilal11" target="_blank" class="bmc-button">
+            <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
+            <span>Buy me a coffee</span>
+        </a>
     </footer>
 
     <script>
