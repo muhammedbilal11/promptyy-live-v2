@@ -16,7 +16,7 @@
     <meta name="google-site-verification" content="jaIMIoRybbz5x1LrBV_G2i9gKR9T6kxs-fDCx_hSmQo" />
 
     <meta property="og:title" content="PROMPTYY - Free AI Prompt Generator">
-    <meta property="og:description" content="Generate expert-level prompts for ChatGPT, Midjourney, and Coding in seconds. Free tool for students and developers.">
+    <meta property="og:description" content="Generate expert-level prompts for ChatGPT, Midjourney, and Coding. Free tool for students.">
     <meta property="og:image" content="https://promptyy-live-v2.vercel.app/favicon.png"> 
     <meta property="og:url" content="https://promptyy-live-v2.vercel.app">
     <meta name="theme-color" content="#09090b">
@@ -26,13 +26,12 @@
 
     <style>
         :root {
-            /* Professional Dark Palette */
-            --bg-color: #09090b;       /* Very dark almost black */
-            --card-bg: #18181b;        /* Slightly lighter for container */
-            --border-color: #27272a;   /* Subtle borders */
-            --text-main: #f4f4f5;      /* White-ish text */
-            --text-muted: #a1a1aa;     /* Gray text for descriptions */
-            --accent-color: #6366f1;   /* Indigo/Blurple accent */
+            --bg-color: #09090b;       
+            --card-bg: #18181b;        
+            --border-color: #27272a;   
+            --text-main: #f4f4f5;      
+            --text-muted: #a1a1aa;     
+            --accent-color: #6366f1;   
             --accent-hover: #4f46e5;   
             --input-bg: #27272a;
         }
@@ -40,7 +39,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 0%, #2e1065 0%, transparent 40%); /* Subtle top glow */
+            background-image: radial-gradient(circle at 50% 0%, #2e1065 0%, transparent 40%);
             color: var(--text-main);
             margin: 0;
             padding: 20px;
@@ -57,8 +56,8 @@
             padding: 40px;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px; /* Smooth rounded corners */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Deep shadow */
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
         }
 
@@ -73,7 +72,7 @@
             margin: 0;
             font-size: 2.5rem;
             letter-spacing: -1px;
-            background: linear-gradient(to right, #fff, #a5b4fc); /* Text Gradient */
+            background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -84,12 +83,6 @@
             letter-spacing: 2px;
             color: var(--accent-color);
             margin-top: 10px;
-        }
-
-        header p {
-            margin-top: 15px;
-            color: var(--text-muted);
-            line-height: 1.6;
         }
 
         .form-group {
@@ -104,8 +97,7 @@
             color: var(--text-muted);
         }
 
-        input[type="text"],
-        select {
+        input[type="text"], select {
             width: 100%;
             padding: 15px;
             background-color: var(--input-bg);
@@ -117,12 +109,41 @@
             box-sizing: border-box;
         }
 
-        input[type="text"]:focus,
-        select:focus {
+        input[type="text"]:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); /* Glow ring */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
         }
+
+        /* --- NEW: RADIO BUTTONS FOR PPT MODE --- */
+        .ppt-options {
+            display: none; /* Hidden by default */
+            background: #27272a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            margin-right: 10px;
+            accent-color: var(--accent-color);
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ------------------------------------- */
 
         button {
             display: block;
@@ -136,63 +157,48 @@
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.1s, opacity 0.2s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); /* Glow button */
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
         }
 
-        button:hover {
-            opacity: 0.9;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
 
         .output-area {
             margin-top: 40px;
             position: relative;
         }
 
-        .output-area label {
-            color: var(--text-main);
-        }
+        .output-area label { color: var(--text-main); }
 
         #output-prompt {
-            background-color: #000; /* Pitch black for code area */
+            background-color: #000;
             padding: 25px;
             border-radius: 8px;
             border: 1px solid #333;
             font-family: "Fira Code", "Courier New", monospace;
             font-size: 1rem;
             line-height: 1.6;
-            color: #4ade80; /* Matrix Green text */
+            color: #4ade80;
             white-space: pre-wrap;
             min-height: 100px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        #output-prompt.error {
-            color: #ef4444; /* Red for errors */
-            border-color: #ef4444;
-        }
-
         #copy-button {
             position: absolute;
-            top: 35px; /* Adjusted for new layout */
+            top: 35px;
             right: 10px;
             width: auto;
             padding: 5px 15px;
             font-size: 0.8rem;
             background: #333;
-            box-shadow: none;
             border: 1px solid #555;
             cursor: pointer;
             color: white;
             border-radius: 4px;
         }
         
-        #copy-button:hover {
-            background: #444;
-        }
+        #copy-button:hover { background: #444; }
 
         .ad-placeholder {
             width: 100%;
@@ -201,32 +207,21 @@
             border-radius: 8px;
         }
 
-        /* Buy Me A Coffee Button Style */
         .bmc-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: #FFDD00; /* Official BMC Yellow */
+            background-color: #FFDD00;
             color: #000000 !important;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             padding: 10px 20px;
-            border-radius: 30px; /* Pill shape */
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 30px;
             margin-top: 15px;
         }
-
-        .bmc-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3); /* Yellow glow */
-        }
-
-        .bmc-button img {
-            height: 20px;
-            margin-right: 8px;
-        }
+        .bmc-button img { height: 20px; margin-right: 8px; }
 
         footer {
             margin-top: auto;
@@ -235,23 +230,15 @@
             padding-bottom: 20px;
             text-align: center;
         }
-
-        footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: var(--accent-color);
-        }
+        footer a { color: var(--text-muted); text-decoration: none; }
+        footer a:hover { color: var(--accent-color); }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Welcome to PROMPTYY </h1>
+            <h1>Welcome to PROMPTYY</h1>
             <h2>"Your Perfect Prompt Engineer"</h2>
             <p>Select your field, enter an idea, and get an expert-level AI prompt.</p>
         </header>
@@ -261,16 +248,31 @@
                 <label for="category">1. Select a Category</label>
                 <select id="category" name="category">
                     <option value="general">General / Everyday Life</option>
-                    <option value="student">Student & Academic</option>
+                    <option value="student">Student & Academic (PPT Mode Available)</option>
                     <option value="creative">Creative & Artist</option>
                     <option value="business">Business & Marketing</option>
                     <option value="developer">Developer & Tech</option>
                 </select>
             </div>
 
+            <div id="ppt-section" class="ppt-options">
+                <label style="color: #a5b4fc; margin-bottom: 10px;">🎓 Presentation / PDF Mode:</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="pptMode" value="none" checked> No PPT
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pptMode" value="text"> Make PPT (From Text)
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pptMode" value="image"> Make PPT (From Images)
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
-                <label for="topic">2. What do you need?</label>
-                <input type="text" id="topic" name="topic" placeholder="e.g., 'plan a 7-day trip to Goa', 'healthy dinner ideas'">
+                <label for="topic">2. What is the Topic?</label>
+                <input type="text" id="topic" name="topic" placeholder="e.g., 'The French Revolution' or 'My Lecture Notes'">
             </div>
             <button type="submit">Generate AI Prompt</button>
         </form>
@@ -283,23 +285,16 @@
     </div> 
 
     <div class="ad-placeholder" style="background: linear-gradient(90deg, #1e1e24, #2d2d35); border: 1px solid #444; color: white; cursor: pointer; position: relative; overflow: hidden; padding: 20px; box-sizing: border-box; display:flex; align-items:center;" onclick="window.open('https://www.udemy.com/course/complete-python-bootcamp/', '_blank')">
-        
         <div style="z-index: 2; text-align: left;">
             <span style="background-color: #facc15; color: black; font-size: 0.7em; padding: 2px 6px; border-radius: 4px; font-weight: bold; text-transform: uppercase;">Ad</span>
             <h3 style="margin: 5px 0; font-size: 1.2em;">Master AI & Python?</h3>
             <p style="margin: 0; font-size: 0.9em; color: #a1a1aa;">Get the top-rated bootcamp for 90% off. <span style="text-decoration: underline; color: #6366f1;">Start Learning.</span></p>
         </div>
-
-        <div style="position: absolute; right: -20px; top: -20px; font-size: 8em; opacity: 0.1; transform: rotate(-20deg);">
-            🚀
-        </div>
+        <div style="position: absolute; right: -20px; top: -20px; font-size: 8em; opacity: 0.1; transform: rotate(-20deg);">🚀</div>
     </div>
 
     <footer>
-        <p>
-            <a href="https://github.com/muhammedbilal11" target="_blank">View Project on GitHub</a>
-        </p>
-
+        <p><a href="https://github.com/muhammedbilal11" target="_blank">View Project on GitHub</a></p>
         <a href="https://www.buymeacoffee.com/muhammedbilal11" target="_blank" class="bmc-button">
             <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
             <span>Buy me a coffee</span>
@@ -313,67 +308,71 @@
             const categoryDropdown = document.getElementById("category");
             const topicInput = document.getElementById("topic");
             const copyButton = document.getElementById("copy-button");
+            const pptSection = document.getElementById("ppt-section");
 
             // --- THE BRAIN: Data for the Prompt Generator ---
-           const promptTemplates = {
+            const promptTemplates = {
                 "general": [
-                    "Act as a world-class Life Coach and Productivity Expert. I need help with: '{topic}'. \n\nCreate a comprehensive, step-by-step action plan that includes:\n1. A clear goal definition.\n2. Daily habits to build.\n3. Potential obstacles and how to overcome them.\n4. A 30-day milestone checklist.\n\nKeep the tone motivating but practical.",
-                    "You are a professional Ghostwriter. Write a highly engaging, viral-worthy blog post about '{topic}'. \n\nStructure:\n- A hook that grabs attention immediately.\n- Three main takeaways backed by examples.\n- A counter-intuitive point that challenges common beliefs.\n- A strong call to action.\n\nTone: Conversational, witty, and authoritative.",
-                    "Act as a Mental Model Expert. Explain the concept of '{topic}' using the Feynman Technique.\n\nRequirements:\n1. Explain it as if I were a 12-year-old.\n2. Use a specific real-world analogy (not abstract concepts).\n3. Break it down into simple components.\n4. Summary of why this matters in daily life."
+                    "Act as a life coach and provide a detailed plan to {topic}. Include daily habits and milestones.",
+                    "Write a humorous and engaging blog post about {topic}.",
+                    "Create a 7-day schedule for {topic} optimized for productivity."
                 ],
                 "student": [
-                    "Act as a Harvard Professor. I am struggling to understand '{topic}'. \n\nPlease provide a deep-dive explanation that covers:\n- The historical context (why does this exist?).\n- The core First Principles of the concept.\n- A step-by-step walkthrough of how it works.\n- Common misconceptions students have.\n\nEnd with 3 quiz questions to test my understanding.",
-                    "You are a Study Skills Expert. Create a 4-week intensive study roadmap to master '{topic}'. \n\nFor each week, define:\n- Key Learning Objectives.\n- Recommended resources (types of books/videos).\n- Practical exercises to do.\n- A 'Boss Fight' challenge to prove mastery at the end of the week.",
-                    "Act as a strict Academic Editor. I am writing an essay about '{topic}'. \n\nProvide a detailed outline that includes:\n- A strong Thesis Statement.\n- 3 Argumentative Pillars with supporting evidence ideas.\n- A Counter-Argument to address.\n- A powerful Conclusion that links back to the thesis."
+                    "Explain {topic} as if I am a 5-year-old.",
+                    "Create a structured study plan for learning {topic} in 4 weeks.",
+                    "Summarize the key concepts of {topic} in bullet points."
                 ],
                 "creative": [
-                    "generate an image of {topic}. \n\nStyle: Cyberpunk / Sci-Fi \nLighting: Neon volumetric fog, dramatic cinematic lighting (teal and orange)\nCamera: Shot on Sony A7R IV, 85mm lens, f/1.8, ISO 100\nDetails: Ultra-realistic, 8k resolution, ray tracing, unreal engine 5 render, highly detailed textures, sharp focus.",
-                    "generate an image of {topic}. \n\nStyle: Studio Ghibli / Anime Watercolor\nAtmosphere: Dreamy, soft pastel colors, golden hour sunlight, floating particles\nComposition: Wide angle, rule of thirds, emotional and nostalgic vibe\nQuality: Masterpiece, high definition, trending on ArtStation.",
-                    "Write a Screenplay Scene based on the idea: '{topic}'. \n\nSetting: A dystopic future.\nCharacters: A reluctant hero and a rogue AI.\n\nInclude:\n- Detailed scene description.\n- Dialogue that reveals character motivation without exposition.\n- A plot twist at the end of the scene."
+                    "A hyper-realistic 8k render of {topic}, cinematic lighting, in the style of Cyberpunk 2077.",
+                    "A watercolor painting of {topic}, soft pastel colors, dreamy atmosphere."
                 ],
                 "business": [
-                    "Act as a Senior Copywriter. Write a high-conversion cold email to pitch '{topic}' to a CEO. \n\nFramework: AIDA (Attention, Interest, Desire, Action).\n\nRequirements:\n- Subject line must be under 7 words and intriguing.\n- The opening hook must be personalized.\n- Focus on the 'Pain Point' and how we solve it.\n- Soft Call to Action (e.g., 'Worth a chat?').",
-                    "You are a Chief Marketing Officer. Create a Go-To-Market strategy for '{topic}'. \n\nInclude:\n1. Target Audience Persona (Demographics & Psychographics).\n2. Unique Value Proposition (UVP).\n3. 3 Key Marketing Channels to focus on.\n4. A 90-day launch timeline.\n5. KPIs to measure success.",
-                    "Act as a SEO Specialist. Generate a content brief for an article about '{topic}'. \n\nInclude:\n- Primary Keyword and 5 Secondary Keywords.\n- Search Intent analysis.\n- Suggested H1, H2, and H3 headers.\n- Meta Title and Description.\n- Internal linking opportunities."
+                    "Write a persuasive sales email pitching {topic} to a potential client.",
+                    "Generate 5 catchy slogans for a company that sells {topic}."
                 ],
                 "developer": [
-                    "Act as a Senior Software Engineer. Write a Python script to handle: '{topic}'. \n\nRequirements:\n- Use Object-Oriented Programming (OOP) principles.\n- Include robust Error Handling (try/except blocks).\n- Add docstrings and comments explaining complex logic.\n- Optimize for time complexity (Big O notation).\n- Include a sample 'main' block to test the code.",
-                    "You are a DevOps Engineer. Create a production-ready Dockerfile and docker-compose.yml for an app that does: '{topic}'. \n\nInclude:\n- Multi-stage builds to reduce image size.\n- Security best practices (non-root user).\n- Environment variable handling.\n- Comments explaining each step.",
-                    "Act as a Tech Lead. Explain how to architect a scalable system for '{topic}'. \n\nCover:\n- Database choice (SQL vs NoSQL) and why.\n- API design (REST vs GraphQL).\n- Caching strategy (Redis/Memcached).\n- Load balancing and horizontal scaling approach."
+                    "Write a clean, commented Python script to {topic}.",
+                    "Explain how to fix a bug related to {topic} in React."
+                ],
+                // --- NEW SPECIAL PPT PROMPTS ---
+                "ppt_text": [
+                    "Act as a Presentation Expert. Create a comprehensive outline for a PowerPoint presentation about '{topic}'. \n\nRequirements:\n- **Structure**: 10 Slides total.\n- **Content**: For each slide, provide the Title, 3 Bullet points of key info, and a 'Speaker Note'.\n- **Visuals**: Suggest an image prompt (for AI generation) to go on each slide.",
+                    "You are a University Professor. Design a lecture slide deck on '{topic}'. \n\nFormat:\n- Slide 1: Engaging Title.\n- Slides 2-4: Core Concepts (Theory).\n- Slides 5-6: Real-world Examples.\n- Slide 7: Interactive Quiz Question.\n- Slide 8: Conclusion.\nFor each slide, write the exact text content."
+                ],
+                "ppt_image": [
+                    "Act as a Visual Analyst and Tutor. I am going to upload images of my study notes/textbook regarding '{topic}'. \n\n**INSTRUCTIONS FOR AI:**\n1. Analyze the text and diagrams in the images I upload.\n2. Extract the key information, dates, and definitions.\n3. Convert this information into a structured PowerPoint Presentation outline.\n4. Ensure the flow is logical and covers all the material in the images.\n\n(Note to User: Copy this prompt, paste it into ChatGPT/Gemini, and THEN upload your images!)",
+                    "You are a Document Converter. I will provide screenshots of a document about '{topic}'. \n\nPlease read the visual content and transform it into a professional PDF Summary. \n\nStructure:\n- **Executive Summary**: What is the document about?\n- **Key Takeaways**: Bullet points extracted from the images.\n- **Action Items**: What needs to be done next?\n\n(Note to User: Paste this into ChatGPT, then drag & drop your images.)"
                 ]
             };
 
-            // --- 1. Placeholder Logic ---
+            // --- Show/Hide PPT Options based on Category ---
             categoryDropdown.addEventListener('change', () => {
                 const selectedCategory = categoryDropdown.value;
-                let newPlaceholder = "";
-                switch (selectedCategory) {
-                    case "general": newPlaceholder = "e.g., 'plan a trip to Goa', 'start a garden'"; break;
-                    case "student": newPlaceholder = "e.g., 'Quantum Physics', 'The French Revolution'"; break;
-                    case "creative": newPlaceholder = "e.g., 'a flying car', 'a lonely robot'"; break;
-                    case "business": newPlaceholder = "e.g., 'new energy drink', 'consulting firm'"; break;
-                    case "developer": newPlaceholder = "e.g., 'scrape a website', 'sort a list'"; break;
-                    default: newPlaceholder = "What can I help you with today?";
+                if (selectedCategory === "student") {
+                    pptSection.style.display = "block";
+                } else {
+                    pptSection.style.display = "none";
+                    // Reset radio to none
+                    document.querySelector('input[name="pptMode"][value="none"]').checked = true;
                 }
+                
+                // Placeholder Logic (Simplified)
+                let newPlaceholder = "What can I help you with today?";
+                if (selectedCategory === "student") newPlaceholder = "e.g., 'Quantum Physics', 'My History Notes'";
+                else if (selectedCategory === "developer") newPlaceholder = "e.g., 'Fix my code'";
                 topicInput.placeholder = newPlaceholder;
             });
 
-            // --- 2. Prevent Enter Key Reload ---
-            topicInput.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-                }
-            });
-
-            // --- 3. The Generator Logic (Client-Side) ---
+            // --- Generator Logic ---
             form.addEventListener("submit", (event) => {
                 event.preventDefault(); 
                 
                 const category = categoryDropdown.value;
-                const userNeed = topicInput.value.trim();        
+                const userNeed = topicInput.value.trim();
                 
-                // Basic Validation
+                // Check PPT Mode
+                const pptMode = document.querySelector('input[name="pptMode"]:checked').value;
+
                 if (!userNeed) {
                     outputElement.textContent = "Please enter a topic first!";
                     outputElement.classList.add('error');
@@ -384,18 +383,22 @@
                 outputElement.classList.remove('error');
                 copyButton.style.display = 'none';
 
-                // SIMULATE AI: Add a small delay
                 setTimeout(() => {
-                    // 1. Get the list of templates
-                    const templates = promptTemplates[category];
-                    
-                    // 2. Pick a Random Template
-                    const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+                    let templates;
 
-                    // 3. Combine with User Input
+                    // 1. SELECT THE RIGHT TEMPLATE LIST
+                    if (category === "student" && pptMode === "text") {
+                        templates = promptTemplates["ppt_text"];
+                    } else if (category === "student" && pptMode === "image") {
+                        templates = promptTemplates["ppt_image"];
+                    } else {
+                        templates = promptTemplates[category];
+                    }
+                    
+                    // 2. Pick Random & Replace
+                    const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
                     const finalPrompt = randomTemplate.replace("{topic}", userNeed);
 
-                    // 4. Display result
                     outputElement.textContent = finalPrompt;
                     copyButton.style.display = 'block'; 
                     copyButton.textContent = 'Copy';
@@ -403,18 +406,15 @@
                 }, 800); 
             });
 
-            // --- 4. Copy Button Logic ---
+            // Copy Button Logic
             copyButton.addEventListener('click', () => {
                 const textToCopy = outputElement.textContent;
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     copyButton.textContent = 'Copied!';
                     setTimeout(() => { copyButton.textContent = 'Copy'; }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
                 });
             });
         });
     </script>
-
 </body>
 </html>
