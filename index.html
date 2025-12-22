@@ -315,36 +315,31 @@
             const copyButton = document.getElementById("copy-button");
 
             // --- THE BRAIN: Data for the Prompt Generator ---
-            const promptTemplates = {
+           const promptTemplates = {
                 "general": [
-                    "Act as a life coach and provide a detailed plan to {topic}. Include daily habits and milestones.",
-                    "Write a humorous and engaging blog post about {topic}.",
-                    "Create a 7-day schedule for {topic} optimized for productivity.",
-                    "Explain {topic} in simple terms using analogies from everyday life."
+                    "Act as a world-class Life Coach and Productivity Expert. I need help with: '{topic}'. \n\nCreate a comprehensive, step-by-step action plan that includes:\n1. A clear goal definition.\n2. Daily habits to build.\n3. Potential obstacles and how to overcome them.\n4. A 30-day milestone checklist.\n\nKeep the tone motivating but practical.",
+                    "You are a professional Ghostwriter. Write a highly engaging, viral-worthy blog post about '{topic}'. \n\nStructure:\n- A hook that grabs attention immediately.\n- Three main takeaways backed by examples.\n- A counter-intuitive point that challenges common beliefs.\n- A strong call to action.\n\nTone: Conversational, witty, and authoritative.",
+                    "Act as a Mental Model Expert. Explain the concept of '{topic}' using the Feynman Technique.\n\nRequirements:\n1. Explain it as if I were a 12-year-old.\n2. Use a specific real-world analogy (not abstract concepts).\n3. Break it down into simple components.\n4. Summary of why this matters in daily life."
                 ],
                 "student": [
-                    "Explain {topic} as if I am a 5-year-old.",
-                    "Create a structured study plan for learning {topic} in 4 weeks.",
-                    "Summarize the key concepts of {topic} in bullet points.",
-                    "Act as a strict professor and grade this essay idea about {topic}: [Insert details here]."
+                    "Act as a Harvard Professor. I am struggling to understand '{topic}'. \n\nPlease provide a deep-dive explanation that covers:\n- The historical context (why does this exist?).\n- The core First Principles of the concept.\n- A step-by-step walkthrough of how it works.\n- Common misconceptions students have.\n\nEnd with 3 quiz questions to test my understanding.",
+                    "You are a Study Skills Expert. Create a 4-week intensive study roadmap to master '{topic}'. \n\nFor each week, define:\n- Key Learning Objectives.\n- Recommended resources (types of books/videos).\n- Practical exercises to do.\n- A 'Boss Fight' challenge to prove mastery at the end of the week.",
+                    "Act as a strict Academic Editor. I am writing an essay about '{topic}'. \n\nProvide a detailed outline that includes:\n- A strong Thesis Statement.\n- 3 Argumentative Pillars with supporting evidence ideas.\n- A Counter-Argument to address.\n- A powerful Conclusion that links back to the thesis."
                 ],
                 "creative": [
-                    "A hyper-realistic 8k render of {topic}, cinematic lighting, in the style of Cyberpunk 2077.",
-                    "A watercolor painting of {topic}, soft pastel colors, dreamy atmosphere.",
-                    "Write a short sci-fi story where the main conflict revolves around {topic}.",
-                    "Design a minimalist logo concept for a brand centered around {topic}."
+                    "generate an image of {topic}. \n\nStyle: Cyberpunk / Sci-Fi \nLighting: Neon volumetric fog, dramatic cinematic lighting (teal and orange)\nCamera: Shot on Sony A7R IV, 85mm lens, f/1.8, ISO 100\nDetails: Ultra-realistic, 8k resolution, ray tracing, unreal engine 5 render, highly detailed textures, sharp focus.",
+                    "generate an image of {topic}. \n\nStyle: Studio Ghibli / Anime Watercolor\nAtmosphere: Dreamy, soft pastel colors, golden hour sunlight, floating particles\nComposition: Wide angle, rule of thirds, emotional and nostalgic vibe\nQuality: Masterpiece, high definition, trending on ArtStation.",
+                    "Write a Screenplay Scene based on the idea: '{topic}'. \n\nSetting: A dystopic future.\nCharacters: A reluctant hero and a rogue AI.\n\nInclude:\n- Detailed scene description.\n- Dialogue that reveals character motivation without exposition.\n- A plot twist at the end of the scene."
                 ],
                 "business": [
-                    "Write a persuasive sales email pitching {topic} to a potential client.",
-                    "Generate 5 catchy slogans for a company that sells {topic}.",
-                    "Create a SEO-optimized article outline about the benefits of {topic}.",
-                    "Act as a marketing expert and analyze the target audience for {topic}."
+                    "Act as a Senior Copywriter. Write a high-conversion cold email to pitch '{topic}' to a CEO. \n\nFramework: AIDA (Attention, Interest, Desire, Action).\n\nRequirements:\n- Subject line must be under 7 words and intriguing.\n- The opening hook must be personalized.\n- Focus on the 'Pain Point' and how we solve it.\n- Soft Call to Action (e.g., 'Worth a chat?').",
+                    "You are a Chief Marketing Officer. Create a Go-To-Market strategy for '{topic}'. \n\nInclude:\n1. Target Audience Persona (Demographics & Psychographics).\n2. Unique Value Proposition (UVP).\n3. 3 Key Marketing Channels to focus on.\n4. A 90-day launch timeline.\n5. KPIs to measure success.",
+                    "Act as a SEO Specialist. Generate a content brief for an article about '{topic}'. \n\nInclude:\n- Primary Keyword and 5 Secondary Keywords.\n- Search Intent analysis.\n- Suggested H1, H2, and H3 headers.\n- Meta Title and Description.\n- Internal linking opportunities."
                 ],
                 "developer": [
-                    "Write a clean, commented Python script to {topic}.",
-                    "Explain how to fix a bug related to {topic} in React.",
-                    "Generate a Dockerfile optimized for an application that does {topic}.",
-                    "Write a SQL query to extract data related to {topic}."
+                    "Act as a Senior Software Engineer. Write a Python script to handle: '{topic}'. \n\nRequirements:\n- Use Object-Oriented Programming (OOP) principles.\n- Include robust Error Handling (try/except blocks).\n- Add docstrings and comments explaining complex logic.\n- Optimize for time complexity (Big O notation).\n- Include a sample 'main' block to test the code.",
+                    "You are a DevOps Engineer. Create a production-ready Dockerfile and docker-compose.yml for an app that does: '{topic}'. \n\nInclude:\n- Multi-stage builds to reduce image size.\n- Security best practices (non-root user).\n- Environment variable handling.\n- Comments explaining each step.",
+                    "Act as a Tech Lead. Explain how to architect a scalable system for '{topic}'. \n\nCover:\n- Database choice (SQL vs NoSQL) and why.\n- API design (REST vs GraphQL).\n- Caching strategy (Redis/Memcached).\n- Load balancing and horizontal scaling approach."
                 ]
             };
 
