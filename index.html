@@ -73,7 +73,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 2.2rem; /* Adjusted for mobile */
+            font-size: 2.2rem;
             letter-spacing: -1px;
             background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
@@ -124,9 +124,9 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
         }
 
-        /* --- NEW: RADIO BUTTONS FOR PPT MODE --- */
+        /* --- PPT OPTIONS --- */
         .ppt-options {
-            display: none; /* Hidden by default */
+            display: none; 
             background: #27272a;
             padding: 15px;
             border-radius: 8px;
@@ -137,12 +137,14 @@
         .radio-group {
             display: flex;
             gap: 20px;
+            flex-wrap: wrap; 
         }
 
         .radio-option {
             display: flex;
             align-items: center;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .radio-option input {
@@ -151,8 +153,7 @@
             width: 18px;
             height: 18px;
         }
-
-        /* ------------------------------------- */
+        /* ------------------ */
 
         button {
             display: block;
@@ -185,11 +186,11 @@
             border-radius: 8px;
             border: 1px solid #333;
             font-family: "Fira Code", "Courier New", monospace;
-            font-size: 1rem;
+            font-size: 0.9rem;
             line-height: 1.6;
             color: #4ade80;
             white-space: pre-wrap;
-            min-height: 100px;
+            min-height: 150px; /* Taller box for longer prompts */
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
         }
 
@@ -319,38 +320,36 @@
             const copyButton = document.getElementById("copy-button");
             const pptSection = document.getElementById("ppt-section");
 
-            // --- THE BRAIN: Data for the Prompt Generator ---
+            // --- THE 'GOD MODE' BRAIN (ALL CATEGORIES LONG) ---
             const promptTemplates = {
                 "general": [
-                    "Act as a life coach and provide a detailed plan to {topic}. Include daily habits and milestones.",
-                    "Write a humorous and engaging blog post about {topic}.",
-                    "Create a 7-day schedule for {topic} optimized for productivity."
+                    "Act as a High-Performance Life Coach & Strategist. I want to master '{topic}'. \n\nCreate a 'Life Operating System' for this goal containing:\n1. **The Vision**: A clear, quantifiable goal statement.\n2. **The Systems**: 3 daily habits and 3 weekly reviews.\n3. **The Anti-Goals**: What exactly should I avoid doing? (Inversion mental model).\n4. **Resource Stack**: The top 3 books, podcasts, and tools for this specific topic.\n5. **Immediate Action**: The exact first step to take in the next 5 minutes.",
+                    "You are an Investigative Journalist and Data Scientist. Write a deep-dive report on '{topic}'. \n\nStructure:\n- **Executive Summary**: The 'TL;DR' in 3 bullet points.\n- **The Deep History**: How did we get here? (First Principles thinking).\n- **Data Analysis**: Present hypothetical data or trends that explain the current state.\n- **Future Projection**: A prediction of where this topic will be in 5 and 10 years.\n- **Conclusion**: A final thought-provoking statement."
                 ],
                 "student": [
-                    "Explain {topic} as if I am a 5-year-old.",
-                    "Create a structured study plan for learning {topic} in 4 weeks.",
-                    "Summarize the key concepts of {topic} in bullet points."
+                    "Act as a PhD Supervisor preparing a student for their thesis defense. The topic is '{topic}'. \n\nProvide:\n1. **Literature Review**: Summary of the key foundational theories behind this.\n2. **Critical Analysis**: What are the flaws or gaps in current understanding?\n3. **Methodology**: How would one scientifically study or prove this?\n4. **Defense Questions**: 3 incredibly difficult questions a professor might ask, and how to answer them.",
+                    "You are a Cognitive Science Expert specializing in Accelerated Learning. Create a 'Super-Learning Protocol' for '{topic}'. \n\nOutput Format:\n- **Phase 1 (Deconstruction)**: What are the 20% of sub-skills that give 80% of the results?\n- **Phase 2 (Selection)**: Which resources (books/videos) are high-signal vs noise?\n- **Phase 3 (Sequencing)**: A logical order to learn the sub-skills.\n- **Phase 4 (Stakes)**: How to create a real-world project to enforce the learning."
                 ],
                 "creative": [
-                    "A hyper-realistic 8k render of {topic}, cinematic lighting, in the style of Cyberpunk 2077.",
-                    "A watercolor painting of {topic}, soft pastel colors, dreamy atmosphere."
+                    "**Midjourney v6 Prompt Engineering**\n\nTopic: {topic}\n\n/imagine prompt: A cinematic masterpiece shot of {topic}, captured on a 35mm IMAX camera, 85mm lens, f/1.8 aperture for shallow depth of field. \n\n**Lighting**: Volumetric god rays, bioluminescent accents, moody chiaroscuro lighting.\n**Texture**: Hyper-detailed, ray-tracing, unreal engine 5 render, sub-surface scattering on materials.\n**Style**: Cyberpunk meets Baroque, highly intricate, trending on ArtStation, 8k resolution.\n**Parameters**: --ar 16:9 --v 6.0 --style raw --s 750 --q 2",
+                    "Act as a Hollywood Screenwriter using the 'Save the Cat' structure. Outline a movie plot about '{topic}'. \n\nBeats to cover:\n1. **The Setup**: The hero's 'Status Quo' and their 'Flaw'.\n2. **The Catalyst**: The incitng incident that changes everything.\n3. **Fun and Games**: The hero exploring the new world of the premise.\n4. **All Is Lost**: The lowest point where they lose everything.\n5. **The Finale**: The final battle and the hero's transformation."
                 ],
                 "business": [
-                    "Write a persuasive sales email pitching {topic} to a potential client.",
-                    "Generate 5 catchy slogans for a company that sells {topic}."
+                    "Act as a Venture Capitalist. I am pitching a startup idea about '{topic}'. \n\nRoast my idea and tell me how to fix it. \n\nAnalyze:\n1. **Market Size**: Is this a $1B opportunity? Why/Why not?\n2. **The Moat**: What prevents Google/Apple from just copying this?\n3. **Unit Economics**: How does this actually make money per user?\n4. **Viral Loop**: How does one user bring in the next user?\n5. **Verdict**: Invest or Pass? (Be brutal).",
+                    "Act as a Direct Response Copywriter. Write a Landing Page structure for a product selling '{topic}'. \n\nSections:\n1. **Headline**: Needs to promise a dream or solve a nightmare.\n2. **Sub-headline**: Explains 'How' specifically.\n3. **Social Proof**: Description of what kind of testimonials to use.\n4. **Benefit Bullets**: 5 bullet points focusing on 'Benefits' not 'Features'.\n5. **The Offer**: A 'No-Brainer' offer stack + Guarantee."
                 ],
                 "developer": [
-                    "Write a clean, commented Python script to {topic}.",
-                    "Explain how to fix a bug related to {topic} in React."
+                    "Act as a Principal Software Architect. Design a scalable system for '{topic}'. \n\nProvide:\n1. **High-Level Architecture**: Microservices vs Monolith? AWS vs Firebase? Why?\n2. **Database Schema**: A Markdown table showing key tables, columns, and relationships (Foreign Keys).\n3. **API Design**: Define 3 core RESTful endpoints with request/response examples.\n4. **Tech Stack**: Recommend the specific languages/frameworks for Frontend, Backend, and DB.\n5. **Scalability**: How to handle 1 million concurrent users (Caching, Load Balancing).",
+                    "Act as a Senior Python Engineer. Write a production-ready script for '{topic}'. \n\nCode Requirements:\n- **Type Hinting**: Use the `typing` module for all functions.\n- **Docstrings**: Google-style docstrings for every class and method.\n- **Error Handling**: Robust `try/except` blocks for edge cases.\n- **Design Patterns**: Use a relevant pattern (Singleton, Factory, Strategy) if applicable.\n- **Testing**: Include a `unittest` class at the bottom to verify the code works."
                 ],
-                // --- NEW SPECIAL PPT PROMPTS ---
+                // --- ULTRA-LONG PPT PROMPTS ---
                 "ppt_text": [
-                    "Act as a Presentation Expert. Create a comprehensive outline for a PowerPoint presentation about '{topic}'. \n\nRequirements:\n- **Structure**: 10 Slides total.\n- **Content**: For each slide, provide the Title, 3 Bullet points of key info, and a 'Speaker Note'.\n- **Visuals**: Suggest an image prompt (for AI generation) to go on each slide.",
-                    "You are a University Professor. Design a lecture slide deck on '{topic}'. \n\nFormat:\n- Slide 1: Engaging Title.\n- Slides 2-4: Core Concepts (Theory).\n- Slides 5-6: Real-world Examples.\n- Slide 7: Interactive Quiz Question.\n- Slide 8: Conclusion.\nFor each slide, write the exact text content."
+                    "Act as a TED Talk Coach and Presentation Designer. I need to deliver a masterclass on '{topic}'. \n\nCreate a detailed 15-Slide Deck Outline. For EVERY slide, provide:\n1. **Slide Title**: Catchy and relevant.\n2. **Visual Directive**: Describe exactly what image or chart should be on the screen (e.g., 'A bar graph showing X vs Y').\n3. **Key Bullet Points**: 3-4 concise points of data/theory.\n4. **Speaker Script**: A 50-word script of exactly what I should say for this slide.\n\nEnsure the presentation follows a storytelling arc: Hook -> Problem -> Solution -> Case Study -> Conclusion.",
+                    "You are a University Professor designing a curriculum. Create a comprehensive Lecture Deck for '{topic}'. \n\n**Structure Requirements:**\n- **Slides 1-3**: Introduction & Historical Context.\n- **Slides 4-8**: Deep Dive into Core Theory (include specific formulas/definitions).\n- **Slides 9-12**: Real-World Applications & Case Studies.\n- **Slides 13-15**: Summary & Interactive Q&A.\n\nOutput Format: Use Markdown to clearly separate slides. Include a 'Teacher's Note' for each slide explaining the pedagogical goal."
                 ],
                 "ppt_image": [
-                    "Act as a Visual Analyst and Tutor. I am going to upload images of my study notes/textbook regarding '{topic}'. \n\n**INSTRUCTIONS FOR AI:**\n1. Analyze the text and diagrams in the images I upload.\n2. Extract the key information, dates, and definitions.\n3. Convert this information into a structured PowerPoint Presentation outline.\n4. Ensure the flow is logical and covers all the material in the images.\n\n(Note to User: Copy this prompt, paste it into ChatGPT/Gemini, and THEN upload your images!)",
-                    "You are a Document Converter. I will provide screenshots of a document about '{topic}'. \n\nPlease read the visual content and transform it into a professional PDF Summary. \n\nStructure:\n- **Executive Summary**: What is the document about?\n- **Key Takeaways**: Bullet points extracted from the images.\n- **Action Items**: What needs to be done next?\n\n(Note to User: Paste this into ChatGPT, then drag & drop your images.)"
+                    "Act as a Senior Research Analyst and Document Digitizer. I am uploading images of my textbook/notes regarding '{topic}'. \n\n**YOUR TASK:**\n1. **Visual OCR**: meticulousy read every sentence, diagram, and margin note in the images I provide.\n2. **Synthesis**: Organize this fragmented information into a coherent, logical flow.\n3. **Production**: Convert this content into a professional PowerPoint Outline (20+ slides).\n\n**FOR EACH SLIDE, GENERATE:**\n- **Header**: The main concept.\n- **Content**: Detailed paragraphs (not just bullets) explaining the concept found in the image.\n- **Important Terms**: A glossary of any bolded/highlighted terms found in the text.\n\n(USER INSTRUCTION: Copy this prompt, paste into ChatGPT, and THEN upload your images!)",
+                    "You are an Accessibility & Format Conversion Specialist. I have screenshots of a document about '{topic}'. \n\nPlease transform this visual data into a **High-Fidelity PDF Summary**. \n\n**REQUIRED SECTIONS:**\n1. **Executive Summary**: A 200-word overview of the document's purpose.\n2. **Detailed Chapter Breakdown**: For each section visible in the images, write a full summary.\n3. **Data Extraction**: If there are tables/charts in the images, recreate them as Markdown tables.\n4. **Critical Analysis**: Identify the 3 most important arguments made in the text.\n\n(USER INSTRUCTION: Paste this into ChatGPT, then drag & drop your images.)"
                 ]
             };
 
@@ -361,11 +360,10 @@
                     pptSection.style.display = "block";
                 } else {
                     pptSection.style.display = "none";
-                    // Reset radio to none
                     document.querySelector('input[name="pptMode"][value="none"]').checked = true;
                 }
                 
-                // Placeholder Logic (Simplified)
+                // Placeholder Logic
                 let newPlaceholder = "What can I help you with today?";
                 if (selectedCategory === "student") newPlaceholder = "e.g., 'Quantum Physics', 'My History Notes'";
                 else if (selectedCategory === "developer") newPlaceholder = "e.g., 'Fix my code'";
@@ -378,8 +376,6 @@
                 
                 const category = categoryDropdown.value;
                 const userNeed = topicInput.value.trim();
-                
-                // Check PPT Mode
                 const pptMode = document.querySelector('input[name="pptMode"]:checked').value;
 
                 if (!userNeed) {
