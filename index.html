@@ -209,7 +209,7 @@
         
         #copy-button:hover { background: #444; }
 
-        /* --- NEW SPONSOR SLOT STYLES --- */
+        /* --- SPONSOR SLOT STYLES --- */
         .sponsor-slot {
             width: 100%;
             padding: 15px;
@@ -220,6 +220,7 @@
             background: #121215;
             transition: all 0.3s;
             cursor: pointer;
+            box-sizing: border-box;
         }
         .sponsor-slot:hover {
             border-color: var(--accent-color);
@@ -235,7 +236,6 @@
             color: var(--text-muted);
             font-size: 0.85rem;
         }
-        /* ------------------------------- */
 
         .ad-banner-area {
             width: 100%;
@@ -317,10 +317,11 @@
             <button type="submit">Generate AI Prompt</button>
         </form>
 
-        <div class="sponsor-slot" onclick="window.location.href='mailto:bilalbasil75@gmail.com?subject=Advertise on Promptyy';">
+        <div class="sponsor-slot" onclick="window.location.href='mailto:muhammedbilal@gmail.com?subject=Advertise on Promptyy';">
             <div class="sponsor-title">📢 Your Ad Here</div>
             <div class="sponsor-text">Get noticed by Students & Developers. Click to Sponsor this spot.</div>
         </div>
+
         <div class="output-area">
             <label for="output-prompt">Your Generated Prompt:</label>
             <button id="copy-button">Copy</button> 
@@ -355,7 +356,27 @@
         <div style="position: absolute; right: -20px; top: -20px; font-size: 8em; opacity: 0.1; transform: rotate(-20deg);">🚀</div>
     </div>
 
+    <article style="max-width: 700px; margin: 40px auto; color: #a1a1aa; line-height: 1.6; padding: 0 20px;">
+        <h3 style="color: #f4f4f5;">About PROMPTYY</h3>
+        <p>
+            Promptyy is a free <strong>AI Prompt Generator</strong> designed specifically for students, developers, and creators. 
+            Unlike generic tools, Promptyy uses advanced logic to create "God Mode" prompts for <strong>ChatGPT, Claude, and Gemini</strong>.
+        </p>
+        
+        <h4 style="color: #f4f4f5; margin-top: 20px;">Why use a Student Prompt Generator?</h4>
+        <p>
+            For students in India and worldwide, creating high-quality presentations is difficult. 
+            Our <strong>Text to PPT</strong> mode helps you convert lecture notes into structured PowerPoint outlines instantly.
+            Whether you are learning <strong>Python programming</strong> or studying for a BCA degree, Promptyy acts as your personal prompt engineer.
+        </p>
 
+        <h4 style="color: #f4f4f5; margin-top: 20px;">Features</h4>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li><strong>Coding Prompts:</strong> Generate bug-free Python, Java, and React code.</li>
+            <li><strong>Midjourney v6:</strong> Create photorealistic image prompts with cinematic lighting.</li>
+            <li><strong>Study Helper:</strong> Summarize textbooks and generate quiz questions.</li>
+        </ul>
+    </article>
     <footer>
         <p><a href="https://github.com/muhammedbilal11" target="_blank">View Project on GitHub</a></p>
         <a href="https://www.buymeacoffee.com/muhammedbilal11" target="_blank" class="bmc-button">
@@ -428,7 +449,7 @@
                 
                 const category = categoryDropdown.value;
                 const userNeed = topicInput.value.trim();
-                const pptMode = document.querySelector('input[name="pptMode"]:checked').value;
+                const pptMode = document.querySelector('input[name="pptMode"][value="none"]').checked ? "none" : document.querySelector('input[name="pptMode"]:checked').value;
 
                 if (!userNeed) {
                     outputElement.textContent = "Please enter a topic first!";
